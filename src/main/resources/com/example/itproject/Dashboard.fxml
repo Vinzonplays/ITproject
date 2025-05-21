@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="hootPane" prefHeight="911.0" prefWidth="1546.0" style="-fx-background-color: FFFBDE;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.DashController">
+    <center>
+        <FlowPane prefHeight="852.0" prefWidth="1546.0" style="-fx-background-color: FFFBDE;" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets top="15.0" />
+            </BorderPane.margin></FlowPane>
+    </center>
+    <top>
+        <HBox alignment="CENTER" prefHeight="55.0" prefWidth="1546.0" style="-fx-background-color: #2A4759;" BorderPane.alignment="CENTER">
+            <children>
+                <Button onAction="#onHome" prefHeight="37.0" prefWidth="155.0" style="-fx-background-color: FF9F00; -fx-background-radius: 10;" text="Home" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Bold" size="20.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets top="5.0" />
+                    </HBox.margin>
+                </Button>
+                <Button onAction="#onMenu" prefHeight="37.0" prefWidth="166.0" style="-fx-background-color: FF9F00; -fx-background-radius: 10;" text="Menu" textFill="WHITE">
+                    <HBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                    </HBox.margin>
+                    <font>
+                        <Font name="Arial Bold" size="20.0" />
+                    </font>
+                </Button>
+                <Button onAction="#onContact" prefHeight="35.0" prefWidth="169.0" style="-fx-background-color: FF9F00; -fx-background-radius: 10;" text="Contact" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Bold" size="20.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                    </HBox.margin>
+                </Button>
+            <Button layoutX="929.0" layoutY="22.0" onAction="#onLogin" prefHeight="35.0" prefWidth="169.0" style="-fx-background-color: FF9F00; -fx-background-radius: 10;" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            </children>
+            <padding>
+                <Insets left="100.0" />
+            </padding>
+        </HBox>
+    </top>
+
+</BorderPane>

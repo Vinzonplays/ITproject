@@ -1,0 +1,201 @@
+package com.example.itproject.Controller;
+
+import com.example.itproject.OrderItem;
+import com.example.itproject.ProductItem;
+import com.example.itproject.Repositories.ProductRepository;
+import com.example.itproject.database.OrderHistoryDAO;
+import com.example.itproject.HistoryRecord;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.FlowPane;
+import javafx.util.converter.IntegerStringConverter;
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class MenuController {
+
+    @FXML private FlowPane raatPane;
+    @FXML private TextField si_Search;
+    @FXML private Button si_Food, si_Drinks, si_Coffee, si_Snack, si_Desert;
+    @FXML private Button si_Clear, si_Checkout;
+    @FXML private Label onTotal, orderStatusLabel;
+    @FXML private TableView<OrderItem> onTableview;
+    @FXML private TableColumn<OrderItem, String> foodItemColumn;
+    @FXML private TableColumn<OrderItem, Integer> foodQuantityColumn;
+    @FXML private TableColumn<OrderItem, Double> foodTotalColumn;
+    @FXML private TableColumn<OrderItem, Void> foodRemoveColumn;
+
+    private double totalAmount = 0.0;
+    private final ProductRepository productRepository = new ProductRepository();
+    private final OrderHistoryDAO orderHistoryDAO = new OrderHistoryDAO();
+    private String currentCategory = "Food";
+
+    @FXML
+    private void initialize() {
+        si_Search.textProperty().addListener((obs, oldVal, newVal) -> filterProducts(newVal));
+
+        si_Clear.setOnAction(e -> clearOrder());
+        si_Checkout.setOnAction(e -> checkout());
+
+        onTableview.setEditable(true);
+
+        foodItemColumn.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getProduct().getName()));
+
+        foodQuantityColumn.setCellValueFactory(cellData -> cellData.getValue().quantityProperty().asObject());
+        foodQuantityColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        foodQuantityColumn.setOnEditCommit(event -> {
+            OrderItem item = event.getRowValue();
+            int newQty = event.getNewValue();
+            if (newQty <= 0) {
+                onTableview.getItems().remove(item);
+            } else {
+                item.setQuantity(newQty);
+            }
+            updateTotal();
+        });
+
+        foodTotalColumn.setCellValueFactory(cellData -> {
+            double total = cellData.getValue().getProduct().getPrice() * cellData.getValue().getQuantity();
+            return new javafx.beans.property.SimpleDoubleProperty(total).asObject();
+        });
+
+        foodRemoveColumn.setCellFactory(col -> new TableCell<>() {
+            private final Button removeButton = new Button("Remove");
+
+            {
+                removeButton.setOnAction(e -> {
+                    OrderItem item = getTableRow().getItem();
+                    if (item != null) {
+                        onTableview.getItems().remove(item);
+                        updateTotal();
+                        orderStatusLabel.setText("Item removed from order.");
+                    }
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : removeButton);
+            }
+        });
+
+        displayProducts(currentCategory);
+    }
+
+    // === Navigation Handlers ===
+    @FXML private void onFood() { currentCategory = "Food"; displayProducts(currentCategory); }
+    @FXML private void onDrinks() { currentCategory = "Drinks"; displayProducts(currentCategory); }
+    @FXML private void onCoffee() { currentCategory = "Coffee"; displayProducts(currentCategory); }
+    @FXML private void onSnack() { currentCategory = "Snack"; displayProducts(currentCategory); }
+    @FXML private void onDessert() { currentCategory = "Dessert"; displayProducts(currentCategory); }
+
+    private void displayProducts(String category) {
+        List<ProductItem> products = productRepository.getAllProductsByCategory(category);
+        raatPane.getChildren().clear();
+
+        for (ProductItem product : products) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/itproject/Product.fxml"));
+                Node productNode = loader.load();
+                ProductControllers controller = loader.getController();
+                controller.setData(product);
+                controller.getAddButton().setOnAction(e -> addToOrder(product, controller.getQuantity()));
+                raatPane.getChildren().add(productNode);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void filterProducts(String searchQuery) {
+        if (searchQuery == null || searchQuery.isBlank()) {
+            displayProducts(currentCategory);
+            return;
+        }
+
+        List<ProductItem> filteredProducts = productRepository.getAllProducts().stream()
+                .filter(p -> p.getName().toLowerCase().contains(searchQuery.toLowerCase()))
+                .collect(Collectors.toList());
+
+        raatPane.getChildren().clear();
+
+        if (filteredProducts.isEmpty()) {
+            raatPane.getChildren().add(new Label("No products found"));
+        } else {
+            for (ProductItem product : filteredProducts) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/itproject/Product.fxml"));
+                    Node productNode = loader.load();
+                    ProductControllers controller = loader.getController();
+                    controller.setData(product);
+                    controller.getAddButton().setOnAction(e -> addToOrder(product, controller.getQuantity()));
+                    raatPane.getChildren().add(productNode);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void addToOrder(ProductItem product, int quantity) {
+        if (quantity <= 0) return;
+
+        for (OrderItem existingItem : onTableview.getItems()) {
+            if (existingItem.getProduct().getId().equals(product.getId())) {
+                existingItem.setQuantity(existingItem.getQuantity() + quantity);
+                updateTotal();
+                orderStatusLabel.setText("Item quantity updated.");
+                return;
+            }
+        }
+
+        onTableview.getItems().add(new OrderItem(product, quantity));
+        updateTotal();
+        orderStatusLabel.setText("Item added to order!");
+    }
+
+    private void updateTotal() {
+        totalAmount = onTableview.getItems().stream()
+                .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
+                .sum();
+        onTotal.setText(String.format("Total: ₱%.2f", totalAmount));
+    }
+
+    private void clearOrder() {
+        onTableview.getItems().clear();
+        updateTotal();
+        orderStatusLabel.setText("Order cleared.");
+    }
+
+    private void checkout() {
+        if (onTableview.getItems().isEmpty()) {
+            orderStatusLabel.setText("No items to checkout.");
+            return;
+        }
+
+        LocalDateTime now = LocalDateTime.now();
+
+        for (OrderItem item : onTableview.getItems()) {
+            for (int i = 0; i < item.getQuantity(); i++) {
+                HistoryRecord record = new HistoryRecord(
+                        item.getProduct().getId(),
+                        item.getProduct().getName(),
+                        item.getProduct().getPrice(),
+                        now
+                );
+                orderHistoryDAO.insertHistoryRecord(record);
+            }
+        }
+
+        clearOrder();
+        orderStatusLabel.setText("Checkout successful! Order saved to history.");
+    }
+}

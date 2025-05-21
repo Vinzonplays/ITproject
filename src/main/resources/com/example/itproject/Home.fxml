@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="1546.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.HomeController">
+    <children>
+    <HBox prefHeight="824.0" prefWidth="1546.0" style="-fx-background-color: block;">
+        <children>
+            <AnchorPane prefHeight="816.0" prefWidth="810.0" style="-fx-background-color: FFFBDE;">
+                <children>
+                    <Label layoutX="49.0" layoutY="184.0" prefHeight="82.0" prefWidth="618.0" text="ARE YOU HUNGRY?" textFill="#fa8f03">
+                        <font>
+                            <Font name="Bauhaus 93" size="70.0" />
+                        </font>
+                    </Label>
+                    <Label layoutX="49.0" layoutY="258.0" prefHeight="50.0" prefWidth="518.0" text="Order now or visit us..." textFill="#fa8f03">
+                        <font>
+                            <Font name="Bookman Old Style Bold" size="40.0" />
+                        </font>
+                    </Label>
+                    <Label layoutX="56.0" layoutY="300.0" prefHeight="31.0" prefWidth="447.0" text="Best food restaurant in Philippines, " textFill="#fa8f03">
+                        <font>
+                            <Font name="Bookman Old Style" size="25.0" />
+                        </font>
+                    </Label>
+                    <Label layoutX="56.0" layoutY="329.0" text="we'll serve you the best" textFill="#fa8f03">
+                        <font>
+                            <Font name="Bookman Old Style" size="25.0" />
+                        </font>
+                    </Label>
+                </children>
+                <HBox.margin>
+                    <Insets />
+                </HBox.margin>
+            </AnchorPane>
+            <AnchorPane prefHeight="816.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);">
+                <children>
+                    <ImageView fx:id="homeImageView" fitHeight="614.0" fitWidth="680.0" layoutX="32.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
+                </children>
+            </AnchorPane>
+        </children>
+    </HBox>
+</children>
+</VBox>
