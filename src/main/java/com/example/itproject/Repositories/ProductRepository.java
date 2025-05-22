@@ -22,20 +22,20 @@ public class ProductRepository {
 
     private void loadHardcodedProducts() {
         allProducts = new ArrayList<>();
-        allProducts.add(new ProductItem("Adobo sa Gata", 5.99, "Food", "adobo sa gata.jpg", "1"));
-        allProducts.add(new ProductItem("Sinigang na Baboy", 2.99, "Food", "sinigang na baboy.png", "2"));
-        allProducts.add(new ProductItem("Inihaw na Liempo", 1.99, "Food", "inihaw na liempo.jpg", "3"));
-        allProducts.add(new ProductItem("Beef Steak", 7.99, "Food", "beef steak.jpg", "4"));
-        allProducts.add(new ProductItem("Chicken Inasal", 5.99, "Food", "chicken inasal.jpg", "5"));
-        allProducts.add(new ProductItem("Bangus Ala Pobre", 5.99, "Food", "bangus ala pobre.jpg", "6"));
-        allProducts.add(new ProductItem("Vegetarian Kare-Kare", 5.99, "Food", "vegetarian kare kare.jpg", "7"));
-        allProducts.add(new ProductItem("Kapeng Barako", 5.99, "Coffee", "kapeng barako.jpg", "8"));
-        allProducts.add(new ProductItem("Iced Coffee Barako", 5.99, "Coffee", "ice coffe barako.jpg", "9"));
-        allProducts.add(new ProductItem("Cafe Latte", 5.99, "Coffee", "cafe latte.png", "10"));
-        allProducts.add(new ProductItem("Cafe Mocha", 5.99, "Coffee", "cafe mocha.jpg", "11"));
+        allProducts.add(new ProductItem("Adobong Manok", 199.00, "Food", "Adobong Manok.jpg", "1"));
+        allProducts.add(new ProductItem("Sinigang na Baboy", 299.00, "Food", "Sinigang Na Baboy.jpg", "2"));
+        allProducts.add(new ProductItem("Inihaw na Liempo", 250.00, "Food", "Inihaw na liempo.jpg", "3"));
+        allProducts.add(new ProductItem("Beef Steak", 350.00, "Food", "Beef Steak.jpg", "4"));
+        allProducts.add(new ProductItem("Chicken Inasal", 5.99, "Food", "Chicken Inasal.jpg", "5"));
+        allProducts.add(new ProductItem("Bangus Ala Pobre", 5.99, "Food", "Pritong Bangus.jpg", "6"));
+        allProducts.add(new ProductItem("Vegetarian Kare-Kare", 5.99, "Food", "Kare Kare.jpg", "7"));
+        allProducts.add(new ProductItem("Kapeng Barako", 5.99, "Coffee", "Kape Barako.jpg", "8"));
+        allProducts.add(new ProductItem("Iced Coffee Barako", 5.99, "Coffee", "iced coffee float.jpg", "9"));
+        allProducts.add(new ProductItem("Cafe Latte", 5.99, "Coffee", "coffee latte.jpg", "10"));
+        allProducts.add(new ProductItem("Cafe Mocha", 5.99, "Coffee", "cafe macha.jpg", "11"));
         allProducts.add(new ProductItem("Caramel Macchiato", 5.99, "Coffee", "caramel macchiato.jpg", "12"));
-        allProducts.add(new ProductItem("Spanish Latte", 5.99, "Coffee", "spanish latte.png", "13"));
-        allProducts.add(new ProductItem("Cold Brew Coffee", 5.99, "Coffee", "cold brew coffe.jpg", "14"));
+        allProducts.add(new ProductItem("Spanish Latte", 5.99, "Coffee", "spanish latte.jpg", "13"));
+        allProducts.add(new ProductItem("Cold Brew Coffee", 5.99, "Coffee", "mocha iced coffee.jpg", "14"));
         allProducts.add(new ProductItem("Sago't Gulaman", 1.99, "Drinks", "sago't gulaman.jpg", "15"));
         allProducts.add(new ProductItem("Fresh Calamansi Juice", 1.99, "Drinks", "fresh calamansi juice.jpg", "16"));
         allProducts.add(new ProductItem("Iced Tea", 1.99, "Drinks", "iced tea.jpg", "17"));

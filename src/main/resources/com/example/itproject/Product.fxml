@@ -14,9 +14,9 @@
     <children>
         <StackPane layoutX="4.0" layoutY="3.0" prefHeight="281.0" prefWidth="240.0">
             <children>
-                <Pane prefHeight="273.0" prefWidth="238.0" style="-fx-background-color: dbd4cb; -fx-background-radius: 20;">
+                <Pane nodeOrientation="LEFT_TO_RIGHT" prefHeight="273.0" prefWidth="238.0" style="-fx-background-color: dbd4cb; -fx-background-radius: 20;">
                     <children>
-                        <ImageView fx:id="imageView" fitHeight="169.0" fitWidth="224.0" layoutX="8.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imageView" fitHeight="130.0" fitWidth="193.0" layoutX="24.0" layoutY="22.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" />
                         <Label fx:id="nameAdd" layoutX="16.0" layoutY="182.0" prefHeight="21.0" prefWidth="149.0" text="FoodName ">
                             <font>
                                 <Font name="System Bold" size="15.0" />
