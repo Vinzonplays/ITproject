@@ -117,6 +117,7 @@ public class OrderHistoryController {
 
             // Set new scene with dashboard
             Scene scene = new Scene(dashboardRoot);
+            stage.fullScreenProperty();
             stage.setScene(scene);
             stage.show();
 

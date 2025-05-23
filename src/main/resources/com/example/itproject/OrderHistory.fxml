@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.OrderHistoryController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.OrderHistoryController">
     <center>
-        <AnchorPane prefHeight="329.0" prefWidth="600.0">
+        <AnchorPane prefHeight="538.0" prefWidth="600.0">
             <children>
-                <TableView fx:id="adminTableview" layoutX="2.0" layoutY="13.0" prefHeight="277.0" prefWidth="592.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="13.0">
+                <TableView fx:id="adminTableview" layoutX="3.2" layoutY="13.0" prefHeight="541.0" prefWidth="590.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="13.0">
                     <columns>
                         <TableColumn fx:id="adminProductId" prefWidth="125.66665136814117" text="Product ID" />
                         <TableColumn fx:id="adminProductName" prefWidth="125.66665136814117" text="Product Name" />

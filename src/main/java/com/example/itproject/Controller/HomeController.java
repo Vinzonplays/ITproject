@@ -3,6 +3,7 @@ package com.example.itproject.Controller;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -11,6 +12,9 @@ public class HomeController {
 
     @FXML
     private ImageView homeImageView;
+
+    @FXML
+    private Button si_OrderNow;
 
     private final String[] imagePaths = {
             "/image/1.png",
@@ -22,30 +26,36 @@ public class HomeController {
             "/image/7.png",
             "/image/8.png",
             "/image/9.png",
-
     };
 
     private int currentIndex = 0;
+    private Timeline imageSlider;
+    private DashController dashController;
 
-    @FXML
-    public void initialize() {
-        showImage(currentIndex);
-
-        // Timeline to change image every 3 seconds
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
-            currentIndex = (currentIndex + 1) % imagePaths.length;
-            showImage(currentIndex);
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+    public void setDashController(DashController dashController) {
+        this.dashController = dashController;
     }
 
-    private void showImage(int index) {
-        try {
-            Image image = new Image(getClass().getResource(imagePaths[index]).toExternalForm());
-            homeImageView.setImage(image);
-        } catch (Exception e) {
-            System.out.println("Failed to load image: " + imagePaths[index]);
+    @FXML
+    private void initialize() {
+        startImageSlider();
+    }
+
+    private void startImageSlider() {
+        imageSlider = new Timeline(new KeyFrame(Duration.seconds(2), e -> switchImage()));
+        imageSlider.setCycleCount(Timeline.INDEFINITE);
+        imageSlider.play();
+    }
+
+    private void switchImage() {
+        currentIndex = (currentIndex + 1) % imagePaths.length;
+        homeImageView.setImage(new Image(getClass().getResourceAsStream(imagePaths[currentIndex])));
+    }
+
+    @FXML
+    private void onOderNow() {
+        if (dashController != null) {
+            dashController.loadUI("hello-view.fxml");
         }
     }
 }

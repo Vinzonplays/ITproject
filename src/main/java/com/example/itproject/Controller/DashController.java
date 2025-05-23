@@ -2,10 +2,11 @@ package com.example.itproject.Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.Node;
+
 import java.io.IOException;
 
 public class DashController {
@@ -30,7 +31,6 @@ public class DashController {
 
     @FXML
     public void initialize() {
-        // Load Home view by default on start
         loadUI("Home.fxml");
     }
 
@@ -59,10 +59,17 @@ public class DashController {
         System.out.println("Login button clicked. Implement login logic here.");
     }
 
-    private void loadUI(String fxmlFile) {
+    public void loadUI(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/itproject/" + fxmlFile));
             Node node = loader.load();
+
+            // Inject this DashController into the HomeController
+            Object controller = loader.getController();
+            if (controller instanceof HomeController) {
+                ((HomeController) controller).setDashController(this);
+            }
+
             hootPane.setCenter(node);
         } catch (IOException e) {
             e.printStackTrace();

@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Text;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
@@ -168,7 +169,7 @@ public class MenuController {
         totalAmount = onTableview.getItems().stream()
                 .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
                 .sum();
-        onTotal.setText(String.format("$%.2f", totalAmount));
+        onTotal.setText(String.format("Total:₱%.2f", totalAmount));
     }
 
     private void clearOrder() {
@@ -196,7 +197,42 @@ public class MenuController {
             orderHistoryDAO.insertHistoryRecord(record);
         }
 
+        // Show receipt dialog
+        Alert receiptAlert = new Alert(Alert.AlertType.INFORMATION);
+        receiptAlert.setTitle("Order Receipt");
+        receiptAlert.setHeaderText("Your Order Receipt");
+        TextArea receiptTextArea = new TextArea(generateReceipt());
+        receiptTextArea.setEditable(false);
+        receiptTextArea.setWrapText(true);
+        receiptTextArea.setPrefWidth(400);
+        receiptTextArea.setPrefHeight(300);
+        receiptAlert.getDialogPane().setContent(receiptTextArea);
+        receiptAlert.showAndWait();
+
         clearOrder();
         orderStatusLabel.setText("Order placed successfully!");
+    }
+
+    private String generateReceipt() {
+        StringBuilder receipt = new StringBuilder();
+        receipt.append("===== Receipt =====\n");
+        receipt.append("Date: ").append(LocalDateTime.now()).append("\n\n");
+
+        receipt.append(String.format("%-20s %5s %10s %10s\n", "Item", "Qty", "Price", "Total"));
+        receipt.append("--------------------------------------------------\n");
+
+        for (OrderItem item : onTableview.getItems()) {
+            String name = item.getProduct().getName();
+            int qty = item.getQuantity();
+            double price = item.getProduct().getPrice();
+            double total = price * qty;
+            receipt.append(String.format("%-20s %5d %10.2f %10.2f\n", name, qty, price, total));
+        }
+        receipt.append("--------------------------------------------------\n");
+        receipt.append(String.format("TOTAL: ₱%.2f\n", totalAmount));
+        receipt.append("===================\n");
+        receipt.append("Thank you for your order!");
+
+        return receipt.toString();
     }
 }
