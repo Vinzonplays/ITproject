@@ -9,92 +9,98 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="769.0"
-      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.itproject.Controller.ContactController">
-    <children>
-        <HBox prefHeight="525.0" prefWidth="769.0">
-            <children>
-                <AnchorPane prefHeight="516.0" prefWidth="377.0">
-                    <children>
-                        <Circle fill="#1fff5c" layoutX="138.0" layoutY="133.0" radius="91.0" stroke="BLACK" strokeType="INSIDE"/>
-                        <Label layoutX="98.0" layoutY="75.0" text="50%">
-                            <font>
-                                <Font name="System Bold" size="40.0"/>
-                            </font>
-                        </Label>
-                        <Label layoutX="98.0" layoutY="147.0" text="BUSINESS ">
-                            <font>
-                                <Font name="Arial Bold" size="15.0"/>
-                            </font>
-                        </Label>
-                        <Label layoutX="110.0" layoutY="162.0" text="LUNCH">
-                            <font>
-                                <Font name="Arial Bold" size="15.0"/>
-                            </font>
-                        </Label>
-                        <Label layoutX="47.0" layoutY="329.0" text="Our Contact">
-                            <font>
-                                <Font name="Arial Bold" size="31.0"/>
-                            </font>
-                        </Label>
-                        <Label layoutX="51.0" layoutY="307.0" text="From: ACLC BUKIDNON"/>
-                    </children>
-                </AnchorPane>
-                <AnchorPane prefHeight="516.0" prefWidth="392.0">
-                    <children>
-                        <Label layoutX="149.0" layoutY="116.0" text="CHART TO US">
-                            <font>
-                                <Font name="System Bold" size="13.0"/>
-                            </font>
-                        </Label>
-                        <Label layoutX="150.0" layoutY="135.0" text="Our friendly team is here to help.">
-                            <font>
-                                <Font size="13.0"/>
-                            </font>
-                        </Label>
-                        <Hyperlink layoutX="147.0" layoutY="154.0" text="VinzonPlays@gmail.com"/>
-                        <Label layoutX="147.0" layoutY="222.0" text="OFFICE">
-                            <font>
-                                <Font name="System Bold" size="13.0"/>
-                            </font>
-                        </Label>
-                        <Label layoutX="146.0" layoutY="240.0" text="Come say hello at our office in ACLC">
-                            <font>
-                                <Font size="13.0"/>
-                            </font>
-                        </Label>
-                        <Label layoutX="147.0" layoutY="260.0" text="P-13 Hagkol Valencia City">
-                            <font>
-                                <Font size="13.0"/>
-                            </font>
-                        </Label>
-                        <Label layoutX="146.0" layoutY="281.0" text="Philippines, PH 8709">
-                            <font>
-                                <Font size="13.0"/>
-                            </font>
-                        </Label>
-                        <Label layoutX="147.0" layoutY="329.0" text="PHONE">
-                            <font>
-                                <Font name="System Bold" size="13.0"/>
-                            </font>
-                        </Label>
-                        <Label layoutX="147.0" layoutY="352.0" text="Mon-Sun From 7AM to 5PM">
-                            <font>
-                                <Font size="13.0"/>
-                            </font>
-                        </Label>
-                        <Label layoutX="142.0" layoutY="372.0" text="+639652701107">
-                            <font>
-                                <Font size="13.0"/>
-                            </font>
-                        </Label>
-                        <ImageView fx:id="phoneImageView" fitHeight="42.0" fitWidth="53.0" layoutX="75.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true"/>
-                        <ImageView fx:id="pinImageView" fitHeight="42.0" fitWidth="53.0" layoutX="75.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true"/>
-                        <ImageView fx:id="emailImageView" fitHeight="42.0" fitWidth="53.0" layoutX="75.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true"/>
-                    </children>
-                </AnchorPane>
-            </children>
-        </HBox>
-    </children>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="910.0" prefWidth="1546.0" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.ContactController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="625.0" prefWidth="1600.0" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);">
+         <children>
+            <AnchorPane prefHeight="626.0" prefWidth="604.0">
+               <children>
+                  <Circle fill="#ffbb21" layoutX="176.0" layoutY="152.0" radius="129.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label layoutX="125.0" layoutY="82.0" text="50%" textFill="#dbd4cb">
+                     <font>
+                        <Font name="System Bold" size="50.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="131.0" layoutY="147.0" text="BUSINESS " textFill="#dbd4cb">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="143.0" layoutY="162.0" text="LUNCH" textFill="#dbd4cb">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="48.0" layoutY="329.0" prefHeight="58.0" prefWidth="309.0" text="Our Contact" textFill="#dbd4cb">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="48.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="51.0" layoutY="307.0" prefHeight="34.0" prefWidth="265.0" text="From: ACLC BUKIDNON" textFill="#dbd4cb">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="626.0" prefWidth="676.0">
+               <children>
+                  <Label layoutX="149.0" layoutY="116.0" text="CHART TO US" textFill="#dbd4cb">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="150.0" layoutY="139.0" text="Our friendly team is here to help." textFill="#dbd4cb">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Hyperlink layoutX="147.0" layoutY="154.0" text="VinzonPlays@gmail.com" textFill="#f00000" underline="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Hyperlink>
+                  <Label layoutX="147.0" layoutY="222.0" text="OFFICE" textFill="#dbd4cb">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="146.0" layoutY="248.0" text="Come say hello at our office in ACLC" textFill="#dbd4cb">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="147.0" layoutY="267.0" text="P-13 Hagkol Valencia City" textFill="#dbd4cb">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="146.0" layoutY="287.0" text="Philippines, PH 8709" textFill="#dbd4cb">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="147.0" layoutY="337.0" text="PHONE" textFill="#dbd4cb">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="147.0" layoutY="367.0" text="Mon-Sun From 7AM to 5PM" textFill="#dbd4cb">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="142.0" layoutY="388.0" text="+639652701107" textFill="#dbd4cb">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="phoneImageView" fitHeight="42.0" fitWidth="53.0" layoutX="75.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="pinImageView" fitHeight="42.0" fitWidth="53.0" layoutX="75.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="emailImageView" fitHeight="42.0" fitWidth="53.0" layoutX="73.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
 </VBox>

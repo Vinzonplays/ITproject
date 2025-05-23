@@ -1,6 +1,7 @@
 package com.example.itproject;
 
-import javafx.beans.property.*;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class OrderItem {
     private final ProductItem product;

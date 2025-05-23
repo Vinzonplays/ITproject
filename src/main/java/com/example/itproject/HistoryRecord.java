@@ -1,59 +1,39 @@
 package com.example.itproject;
 
-import javafx.beans.property.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class HistoryRecord {
-    private final StringProperty productId;
-    private final StringProperty productName;
-    private final DoubleProperty price;
-    private final ObjectProperty<LocalDateTime> dateTime;
+    private final String productId;
+    private final String productName;
+    private final int quantity;
+    private final double price;
+    private final LocalDateTime dateTime;
 
-    public HistoryRecord(String productId, String productName, double price, LocalDateTime dateTime) {
-        this.productId = new SimpleStringProperty(productId);
-        this.productName = new SimpleStringProperty(productName);
-        this.price = new SimpleDoubleProperty(price);
-        this.dateTime = new SimpleObjectProperty<>(dateTime);
+    public HistoryRecord(String productId, String productName, int quantity, double price, LocalDateTime dateTime) {
+        this.productId = productId;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.price = price;
+        this.dateTime = dateTime;
     }
 
-    // JavaFX property getters for TableView binding
-    public StringProperty productIdProperty() {
+    public String getProductId() {
         return productId;
     }
 
-    public StringProperty productNameProperty() {
+    public String getProductName() {
         return productName;
     }
 
-    public DoubleProperty priceProperty() {
-        return price;
-    }
-
-    public ObjectProperty<LocalDateTime> dateTimeProperty() {
-        return dateTime;
-    }
-
-    // Convenience method for formatted datetime string property
-    public StringProperty formattedDateTimeProperty() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return new SimpleStringProperty(dateTime.get().format(formatter));
-    }
-
-    // Standard getters (useful for DAO and elsewhere)
-    public String getProductId() {
-        return productId.get();
-    }
-
-    public String getProductName() {
-        return productName.get();
+    public int getQuantity() {
+        return quantity;
     }
 
     public double getPrice() {
-        return price.get();
+        return price;
     }
 
     public LocalDateTime getDateTime() {
-        return dateTime.get();
+        return dateTime;
     }
 }

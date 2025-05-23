@@ -20,6 +20,19 @@ public class ProductControllers {
 
     private ProductItem product;
 
+    // Initialize method is called after @FXML fields are injected
+    @FXML
+    public void initialize() {
+        // Set fixed size for imageView to ensure same size for all images
+        imageView.setFitWidth(200);  // width in pixels
+        imageView.setFitHeight(150); // height in pixels
+        imageView.setPreserveRatio(true); // keep aspect ratio without distortion
+
+        // Initialize spinner value factory here if desired
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 1);
+        onSpinner.setValueFactory(valueFactory);
+    }
+
     public void setData(ProductItem productItem) {
         this.product = productItem;
         nameAdd.setText(productItem.getName());
@@ -28,30 +41,19 @@ public class ProductControllers {
         // Always show the original price only
         amountAdd.setText(String.format("₱%.2f", productItem.getPrice()));
 
-        // Set spinner range (1 to 10) and default value (1)
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 1);
-        onSpinner.setValueFactory(valueFactory);
-
-        // Removed the listener that updated amount based on quantity
-        // onSpinner.valueProperty().addListener((obs, oldVal, newVal) -> updateAmountLabel(newVal));
+        // Spinner is already initialized in initialize() method
     }
 
     private void loadProductImage(String imagePath) {
-        if (getClass().getResource("/com/example/itproject/images/" + imagePath) != null) {
-            Image image = new Image(getClass().getResourceAsStream("/com/example/itproject/images/" + imagePath));
+        var resource = getClass().getResourceAsStream("/com/example/itproject/images/" + imagePath);
+        if (resource != null) {
+            // Load image with no extra resizing because imageView handles it
+            Image image = new Image(resource);
             imageView.setImage(image);
         } else {
             imageView.setImage(null);
         }
     }
-
-    // This method is no longer needed unless you want to calculate total price later
-    /*
-    private void updateAmountLabel(int quantity) {
-        double amount = product.getPrice() * quantity;
-        amountAdd.setText(String.format("₱%.2f", amount));
-    }
-    */
 
     public Button getAddButton() {
         return onAdd;

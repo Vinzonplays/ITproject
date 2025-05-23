@@ -10,17 +10,20 @@ import java.util.List;
 
 public class OrderHistoryDAO {
 
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     public void insertHistoryRecord(HistoryRecord record) {
-        String sql = "INSERT INTO order_history(product_id, product_name, price, order_datetime) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO order_history (product_id, product_name, quantity, price, order_datetime) " +
+                "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, record.getProductId());
             stmt.setString(2, record.getProductName());
-            stmt.setDouble(3, record.getPrice());
-            stmt.setString(4, record.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-
+            stmt.setInt(3, record.getQuantity());
+            stmt.setDouble(4, record.getPrice());
+            stmt.setString(5, record.getDateTime().format(formatter));
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -29,37 +32,36 @@ public class OrderHistoryDAO {
     }
 
     public List<HistoryRecord> getAllHistoryRecords() {
-        List<HistoryRecord> history = new ArrayList<>();
-        String sql = "SELECT * FROM order_history ORDER BY order_datetime DESC";
+        List<HistoryRecord> records = new ArrayList<>();
+        String query = "SELECT * FROM order_history";
 
         try (Connection conn = DatabaseConnector.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
-                history.add(new HistoryRecord(
+                records.add(new HistoryRecord(
                         rs.getString("product_id"),
                         rs.getString("product_name"),
+                        rs.getInt("quantity"),
                         rs.getDouble("price"),
-                        LocalDateTime.parse(rs.getString("order_datetime"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                        LocalDateTime.parse(rs.getString("order_datetime"), formatter)
                 ));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return history;
+        return records;
     }
 
     public void deleteHistoryRecord(HistoryRecord record) {
-        String sql = "DELETE FROM order_history WHERE product_id = ? AND order_datetime = ?";
+        String query = "DELETE FROM order_history WHERE product_id = ? AND order_datetime = ? LIMIT 1";
 
         try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, record.getProductId());
-            stmt.setString(2, record.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-
+            stmt.setString(2, record.getDateTime().format(formatter));
             stmt.executeUpdate();
 
         } catch (SQLException e) {

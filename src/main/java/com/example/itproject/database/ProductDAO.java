@@ -1,6 +1,7 @@
 package com.example.itproject.database;
 
 import com.example.itproject.ProductItem;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,6 @@ public class ProductDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return products;
     }
 
@@ -50,13 +50,9 @@ public class ProductDAO {
                         rs.getString("id")
                 ));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return products;
     }
-
-    // Add more DAO methods as needed
 }

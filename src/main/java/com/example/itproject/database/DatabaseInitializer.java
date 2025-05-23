@@ -10,27 +10,29 @@ public class DatabaseInitializer {
         try (Connection conn = DatabaseConnector.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            // Product Table
-            stmt.execute("""
+            String createProductsTable = """
                 CREATE TABLE IF NOT EXISTS products (
                     id TEXT PRIMARY KEY,
                     name TEXT NOT NULL,
                     price REAL NOT NULL,
                     category TEXT NOT NULL,
                     imagePath TEXT
-                );
-            """);
+                )
+            """;
 
-            // Order History Table
-            stmt.execute("""
+            String createOrderHistoryTable = """
                 CREATE TABLE IF NOT EXISTS order_history (
-                    order_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    product_id TEXT,
-                    product_name TEXT,
-                    price REAL,
-                    order_datetime TEXT
-                );
-            """);
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    product_id TEXT NOT NULL,
+                    product_name TEXT NOT NULL,
+                    quantity INTEGER NOT NULL,
+                    price REAL NOT NULL,
+                    order_datetime TEXT NOT NULL
+                )
+            """;
+
+            stmt.execute(createProductsTable);
+            stmt.execute(createOrderHistoryTable);
 
         } catch (SQLException e) {
             e.printStackTrace();

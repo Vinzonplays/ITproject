@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="1546.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.HomeController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="1546.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.HomeController">
     <children>
     <HBox prefHeight="824.0" prefWidth="1546.0" style="-fx-background-color: block;">
         <children>
@@ -37,9 +39,9 @@
                     <Insets />
                 </HBox.margin>
             </AnchorPane>
-            <AnchorPane prefHeight="816.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);">
+            <AnchorPane prefHeight="816.0" prefWidth="739.0" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);">
                 <children>
-                    <ImageView fx:id="homeImageView" fitHeight="614.0" fitWidth="680.0" layoutX="32.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
+                    <ImageView fx:id="homeImageView" fitHeight="614.0" fitWidth="700.0" layoutX="19.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" />
                 </children>
             </AnchorPane>
         </children>

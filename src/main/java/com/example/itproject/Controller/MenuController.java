@@ -22,7 +22,7 @@ public class MenuController {
 
     @FXML private FlowPane raatPane;
     @FXML private TextField si_Search;
-    @FXML private Button si_Food, si_Drinks, si_Coffee, si_Snack, si_Desert;
+    @FXML private Button si_Food, si_Drinks, si_Coffee, si_Snack, si_Dessert;  // fixed Dessert spelling
     @FXML private Button si_Clear, si_Checkout;
     @FXML private Label onTotal, orderStatusLabel;
     @FXML private TableView<OrderItem> onTableview;
@@ -146,27 +146,29 @@ public class MenuController {
     }
 
     private void addToOrder(ProductItem product, int quantity) {
-        if (quantity <= 0) return;
+        if (quantity <= 0) {
+            orderStatusLabel.setText("Quantity must be greater than zero.");
+            return;
+        }
 
-        for (OrderItem existingItem : onTableview.getItems()) {
-            if (existingItem.getProduct().getId().equals(product.getId())) {
-                existingItem.setQuantity(existingItem.getQuantity() + quantity);
+        for (OrderItem item : onTableview.getItems()) {
+            if (item.getProduct().getId().equals(product.getId())) {
+                item.setQuantity(item.getQuantity() + quantity);
                 updateTotal();
-                orderStatusLabel.setText("Item quantity updated.");
+                orderStatusLabel.setText("Updated quantity for " + product.getName());
                 return;
             }
         }
-
         onTableview.getItems().add(new OrderItem(product, quantity));
         updateTotal();
-        orderStatusLabel.setText("Item added to order!");
+        orderStatusLabel.setText(product.getName() + " added to order.");
     }
 
     private void updateTotal() {
         totalAmount = onTableview.getItems().stream()
                 .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
                 .sum();
-        onTotal.setText(String.format("Total: ₱%.2f", totalAmount));
+        onTotal.setText(String.format("$%.2f", totalAmount));
     }
 
     private void clearOrder() {
@@ -184,18 +186,17 @@ public class MenuController {
         LocalDateTime now = LocalDateTime.now();
 
         for (OrderItem item : onTableview.getItems()) {
-            for (int i = 0; i < item.getQuantity(); i++) {
-                HistoryRecord record = new HistoryRecord(
-                        item.getProduct().getId(),
-                        item.getProduct().getName(),
-                        item.getProduct().getPrice(),
-                        now
-                );
-                orderHistoryDAO.insertHistoryRecord(record);
-            }
+            HistoryRecord record = new HistoryRecord(
+                    item.getProduct().getId(),
+                    item.getProduct().getName(),
+                    item.getQuantity(),
+                    item.getProduct().getPrice(),
+                    now
+            );
+            orderHistoryDAO.insertHistoryRecord(record);
         }
 
         clearOrder();
-        orderStatusLabel.setText("Checkout successful! Order saved to history.");
+        orderStatusLabel.setText("Order placed successfully!");
     }
 }
