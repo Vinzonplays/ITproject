@@ -3,21 +3,42 @@ package com.example.itproject.Repositories;
 import com.example.itproject.ProductItem;
 import com.example.itproject.database.ProductDAO;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProductRepository {
 
-    private List<ProductItem> allProducts;
+    private final List<ProductItem> allProducts;
 
     public ProductRepository() {
         ProductDAO dao = new ProductDAO();
-        allProducts = dao.getAllProducts();
+        List<ProductItem> dbProducts = dao.getAllProducts();
+        List<ProductItem> hardcoded = loadHardcodedProducts();
 
-        if (allProducts == null || allProducts.isEmpty()) {
-            allProducts = loadHardcodedProducts();
+        // Combine DB and hardcoded, without duplicates based on ID
+        Set<String> existingIds = new HashSet<>();
+        allProducts = new ArrayList<>();
+
+        for (ProductItem p : hardcoded) {
+            allProducts.add(p);
+            existingIds.add(p.getId());
         }
+
+        for (ProductItem p : dbProducts) {
+            if (!existingIds.contains(p.getId())) {
+                allProducts.add(p);
+            }
+        }
+    }
+
+    public List<ProductItem> getAllProducts() {
+        return allProducts;
+    }
+
+    public List<ProductItem> getAllProductsByCategory(String category) {
+        return allProducts.stream()
+                .filter(p -> p.getCategory().equalsIgnoreCase(category))
+                .collect(Collectors.toList());
     }
 
     private List<ProductItem> loadHardcodedProducts() {
@@ -72,7 +93,6 @@ public class ProductRepository {
     public void syncHardcodedProductsToDatabase() {
         ProductDAO dao = new ProductDAO();
         List<ProductItem> hardcodedProducts = loadHardcodedProducts();
-
         List<ProductItem> existingProducts = dao.getAllProducts();
 
         for (ProductItem product : hardcodedProducts) {
@@ -90,15 +110,5 @@ public class ProductRepository {
                 System.out.println("Product already exists, skipping: " + product.getName());
             }
         }
-    }
-
-    public List<ProductItem> getAllProducts() {
-        return allProducts;
-    }
-
-    public List<ProductItem> getAllProductsByCategory(String category) {
-        return allProducts.stream()
-                .filter(p -> p.getCategory().equalsIgnoreCase(category))
-                .collect(Collectors.toList());
     }
 }

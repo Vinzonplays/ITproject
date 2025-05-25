@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.io.InputStream;
+
 public class HomeController {
 
     @FXML
@@ -17,15 +19,17 @@ public class HomeController {
     private Button si_OrderNow;
 
     private final String[] imagePaths = {
-            "/image/1.png",
-            "/image/2.png",
-            "/image/3.png",
-            "/image/4.png",
-            "/image/5.png",
-            "/image/6.png",
-            "/image/7.png",
-            "/image/8.png",
-            "/image/9.png",
+            "/image/1.jpg",
+            "/image/2.jpg",
+            "/image/3.jpg",
+            "/image/4.jpg",
+            "/image/5.jpg",
+            "/image/6.jpg",
+            "/image/7.jpg",
+            "/image/8.jpg",
+            "/image/9.jpg",
+            "/image/10.jpg",
+            "/image/11.jpg"
     };
 
     private int currentIndex = 0;
@@ -38,7 +42,8 @@ public class HomeController {
 
     @FXML
     private void initialize() {
-        startImageSlider();
+        loadImage(imagePaths[currentIndex]); // Load the first image immediately
+        startImageSlider();                 // Start the slideshow
     }
 
     private void startImageSlider() {
@@ -49,7 +54,16 @@ public class HomeController {
 
     private void switchImage() {
         currentIndex = (currentIndex + 1) % imagePaths.length;
-        homeImageView.setImage(new Image(getClass().getResourceAsStream(imagePaths[currentIndex])));
+        loadImage(imagePaths[currentIndex]);
+    }
+
+    private void loadImage(String path) {
+        InputStream stream = getClass().getResourceAsStream(path);
+        if (stream == null) {
+            System.out.println("Image not found: " + path);
+            return;
+        }
+        homeImageView.setImage(new Image(stream));
     }
 
     @FXML

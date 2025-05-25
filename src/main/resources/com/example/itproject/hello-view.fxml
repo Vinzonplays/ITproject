@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="782.0" prefWidth="1375.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.MenuController">
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="1375.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.MenuController">
     <top>
         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="1090.0" spacing="10" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);" BorderPane.alignment="TOP_CENTER">
             <children>
@@ -45,7 +53,7 @@
             <children>
                 <Label text="Order List">
                     <font>
-                        <Font name="Calibri Bold" size="33.0" />
+                        <Font name="Bookman Old Style Bold" size="31.0" />
                     </font></Label>
                 <TableView fx:id="onTableview" prefHeight="407.0" prefWidth="312.0">
                     <columns>
@@ -84,9 +92,9 @@
         </VBox>
     </right>
     <center>
-        <ScrollPane hbarPolicy="NEVER" prefHeight="705.0" prefWidth="1008.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+        <ScrollPane hbarPolicy="NEVER" prefHeight="705.0" prefWidth="1053.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
             <content>
-                <FlowPane fx:id="raatPane" prefHeight="666.0" prefWidth="1094.0" />
+                <FlowPane fx:id="raatPane" prefHeight="666.0" prefWidth="1080.0" />
             </content>
             <BorderPane.margin>
                 <Insets top="5.0" />

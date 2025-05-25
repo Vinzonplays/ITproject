@@ -9,44 +9,56 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="1546.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.HomeController">
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="953.0" prefWidth="1600.0" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.HomeController">
     <children>
-    <HBox prefHeight="824.0" prefWidth="1546.0" style="-fx-background-color: block;">
-        <children>
-            <AnchorPane prefHeight="816.0" prefWidth="810.0" style="-fx-background-color: FFFBDE;">
-                <children>
-                    <Label layoutX="49.0" layoutY="184.0" prefHeight="82.0" prefWidth="618.0" text="ARE YOU HUNGRY?" textFill="#fa8f03">
+      <VBox alignment="CENTER" style="-fx-background-radius: 100; -fx-border-radius: 100;">
+         <children>
+              <ImageView fx:id="homeImageView" fitHeight="465.0" fitWidth="968.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 10; -fx-background-radius: 10;" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+         </VBox.margin>
+      </VBox>
+      <HBox>
+         <children>
+            <VBox prefHeight="467.0" prefWidth="619.0">
+               <children>
+                    <Label prefHeight="82.0" prefWidth="618.0" text="ARE YOU HUNGRY?" textFill="#fa8f03">
                         <font>
                             <Font name="Bauhaus 93" size="70.0" />
                         </font>
                     </Label>
-                    <Label layoutX="49.0" layoutY="258.0" prefHeight="50.0" prefWidth="518.0" text="Order now or visit us..." textFill="#fa8f03">
+                    <Label prefHeight="50.0" prefWidth="518.0" text="Order now or visit us..." textFill="#fa8f03">
                         <font>
                             <Font name="Bookman Old Style Bold" size="40.0" />
                         </font>
                     </Label>
-                    <Label layoutX="56.0" layoutY="300.0" prefHeight="31.0" prefWidth="447.0" text="Best food restaurant in Philippines, " textFill="#fa8f03">
+                    <Label prefHeight="31.0" prefWidth="447.0" text="Best food restaurant in Philippines, " textFill="#fa8f03">
                         <font>
                             <Font name="Bookman Old Style" size="25.0" />
                         </font>
                     </Label>
-                    <Label layoutX="56.0" layoutY="329.0" text="we'll serve you the best" textFill="#fa8f03">
+                    <Label text="we'll serve you the best" textFill="#fa8f03">
                         <font>
                             <Font name="Bookman Old Style" size="25.0" />
                         </font>
                     </Label>
-                  <Button fx:id="si_OrderNow" layoutX="56.0" layoutY="395.0" mnemonicParsing="false" onAction="#onOderNow" prefHeight="50.0" prefWidth="177.0" text="Order Now" />
-                </children>
-                <HBox.margin>
-                    <Insets />
-                </HBox.margin>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </VBox>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="si_OrderNow" layoutX="11.0" layoutY="145.0" mnemonicParsing="false" onAction="#onOderNow" prefHeight="72.0" prefWidth="178.0" style="-fx-background-color: FF9F00; -fx-border-radius: 5; -fx-background-radius: 5;" text="Order Now">
+                     <font>
+                        <Font name="Bell MT Bold" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
             </AnchorPane>
-            <AnchorPane prefHeight="816.0" prefWidth="739.0" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);">
-                <children>
-                    <ImageView fx:id="homeImageView" fitHeight="614.0" fitWidth="700.0" layoutX="19.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" />
-                </children>
-            </AnchorPane>
-        </children>
-    </HBox>
+         </children>
+      </HBox>
 </children>
 </VBox>

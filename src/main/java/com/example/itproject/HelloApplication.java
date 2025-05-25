@@ -16,9 +16,9 @@
 
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Dashboard.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-            stage.setFullScreen(true);
             stage.setTitle("Hello!");
             stage.setScene(scene);
+            stage.setMaximized(true);
             stage.show();
         }
 

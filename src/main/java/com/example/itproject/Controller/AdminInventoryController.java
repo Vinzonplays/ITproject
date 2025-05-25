@@ -1,14 +1,15 @@
 package com.example.itproject.Controller;
 
 import com.example.itproject.ProductItem;
-import com.example.itproject.database.ProductDAO;
 import com.example.itproject.Repositories.ProductRepository;
+import com.example.itproject.database.ProductDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AdminInventoryController {
 
@@ -18,6 +19,7 @@ public class AdminInventoryController {
     @FXML private TextField priceAdminInventory;
     @FXML private ChoiceBox<String> categoryAdminInventory;
     @FXML private ChoiceBox<String> imageChoice;
+    @FXML private Button reorderButton; // Add this in FXML
 
     private final ProductDAO productDAO = new ProductDAO();
     private final ProductRepository productRepository = new ProductRepository();
@@ -26,30 +28,24 @@ public class AdminInventoryController {
 
     @FXML
     public void initialize() {
-        // Load categories dynamically from the existing products in DB or repo
-        List<String> categories = productRepository.getAllProducts()
-                .stream()
+        refreshAllProductsFromRepository();
+
+        List<ProductItem> allProducts = products;
+
+        List<String> categories = allProducts.stream()
                 .map(ProductItem::getCategory)
                 .distinct()
                 .sorted()
-                .toList();
-
+                .collect(Collectors.toList());
         categoryAdminInventory.setItems(FXCollections.observableArrayList(categories));
 
-        // You can also load images dynamically from existing products
-        List<String> images = productRepository.getAllProducts()
-                .stream()
+        List<String> images = allProducts.stream()
                 .map(ProductItem::getImagePath)
                 .distinct()
                 .sorted()
-                .toList();
-
+                .collect(Collectors.toList());
         imageChoice.setItems(FXCollections.observableArrayList(images));
 
-        // Load products from database
-        refreshProductsFromDB();
-
-        // Setup ListView cell formatting
         productListView.setItems(products);
         productListView.setCellFactory(param -> new ListCell<>() {
             @Override
@@ -62,9 +58,10 @@ public class AdminInventoryController {
         });
     }
 
-    private void refreshProductsFromDB() {
+    private void refreshAllProductsFromRepository() {
         products.clear();
-        products.addAll(productDAO.getAllProducts());
+        products.addAll(productRepository.getAllProducts()); // From static repo
+        products.addAll(productDAO.getAllProducts());         // From DB
     }
 
     @FXML
@@ -84,14 +81,11 @@ public class AdminInventoryController {
         try {
             price = Double.parseDouble(priceText);
         } catch (NumberFormatException e) {
-            showAlert("Invalid price. Please enter a number.");
+            showAlert("Invalid price. Please enter a valid number.");
             return;
         }
 
-        // Check if product ID already exists in DB
-        boolean exists = productDAO.getAllProducts()
-                .stream()
-                .anyMatch(p -> p.getId().equals(id));
+        boolean exists = products.stream().anyMatch(p -> p.getId().equals(id));
         if (exists) {
             showAlert("Product ID already exists.");
             return;
@@ -104,6 +98,7 @@ public class AdminInventoryController {
             products.add(newItem);
             updateCategoryAndImageChoices(newItem);
             clearFields();
+            showAlert("Product added successfully.");
         } else {
             showAlert("Failed to add product to database.");
         }
@@ -122,6 +117,39 @@ public class AdminInventoryController {
             }
         } else {
             showAlert("Please select a product to delete.");
+        }
+    }
+
+    @FXML
+    private void onClickReorder() {
+        ProductItem selected = productListView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert("Please select a product to reorder.");
+            return;
+        }
+
+        // Generate a new ID based on existing one
+        String newId = selected.getId() + "_copy";
+        if (products.stream().anyMatch(p -> p.getId().equals(newId))) {
+            showAlert("Reordered product already exists. Please use a different ID.");
+            return;
+        }
+
+        ProductItem reordered = new ProductItem(
+                selected.getName(),
+                selected.getPrice(),
+                selected.getCategory(),
+                selected.getImagePath(),
+                newId
+        );
+
+        boolean success = productDAO.addProduct(reordered);
+        if (success) {
+            products.add(reordered);
+            updateCategoryAndImageChoices(reordered);
+            showAlert("Product reordered and added as a new item.");
+        } else {
+            showAlert("Failed to reorder product.");
         }
     }
 

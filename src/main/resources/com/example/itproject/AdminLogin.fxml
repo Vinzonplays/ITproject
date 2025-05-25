@@ -6,6 +6,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" prefHeight="953.0" prefWidth="1355.0" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.AdminLoginController">
@@ -18,10 +21,29 @@
                      <font>
                         <Font name="Bookman Old Style Bold" size="22.0" />
                      </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.2311500906944275" green="0.25012606382369995" blue="0.5157894492149353" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.5360260009765625" green="0.5203898549079895" blue="0.9894737005233765" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
                   </Label>
-                  <TextField fx:id="usernameField" promptText="Username" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 5;" />
-                  <PasswordField fx:id="passwordField" promptText="Password" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 5;" />
-                  <Button onAction="#handleLogin" prefHeight="41.0" prefWidth="125.0" style="-fx-background-color: FF9F00; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Login" />
+                  <TextField fx:id="usernameField" promptText="Username" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db);" />
+                  <PasswordField fx:id="passwordField" promptText="Password" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db);" />
+                  <Button onAction="#handleLogin" prefHeight="41.0" prefWidth="125.0" style="-fx-background-color: FF9F00; -fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db); -fx-border-radius: 5;" text="Login">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="16.0" />
+                     </font></Button>
                   <Label fx:id="errorLabel" style="-fx-font-size: 12px;" textFill="#805901" />
                </children>
             </VBox>

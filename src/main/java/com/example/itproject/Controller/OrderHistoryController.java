@@ -97,6 +97,7 @@ public class OrderHistoryController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/itproject/AdminInventory.fxml"));
             Pane inventoryPane = loader.load();
+
             paatPane.setCenter(inventoryPane);
         } catch (IOException e) {
             e.printStackTrace();
@@ -109,7 +110,6 @@ public class OrderHistoryController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/itproject/Dashboard.fxml"));
             Pane dashboardPane = loader.load();
             Scene scene = new Scene(dashboardPane);
-
             Stage stage = (Stage) paatPane.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
