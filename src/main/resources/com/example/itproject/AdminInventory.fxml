@@ -10,50 +10,51 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="398.0" prefWidth="845.0" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.AdminInventoryController">
-      <children>
-          <ListView fx:id="productListView" layoutX="11.2" prefHeight="418.0" prefWidth="882.0" style="-fx-background-radius: 5; -fx-border-color: FF9F00; -fx-border-radius: 5;" AnchorPane.bottomAnchor="233.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="10.0" />
-          <StackPane layoutX="8.0" layoutY="228.0" prefHeight="220.0" prefWidth="829.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
-              <children>
-                  <AnchorPane prefHeight="369.0" prefWidth="801.0" style="-fx-background-color: white; -fx-background-radius: 10;">
-                      <children>
-                          <TextField fx:id="productIDAdminInventory" layoutX="128.0" layoutY="22.0" style="-fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db); -fx-border-radius: 5;" AnchorPane.leftAnchor="128.0" AnchorPane.topAnchor="22.0" />
-                          <TextField fx:id="productNameAdminInventory" layoutX="128.0" layoutY="58.0" prefHeight="25.0" prefWidth="207.0" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db);" AnchorPane.leftAnchor="128.0" />
-                          <TextField fx:id="priceAdminInventory" layoutX="453.0" layoutY="20.0" style="-fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db); -fx-border-radius: 5;" />
-                          <Label layoutX="50.0" layoutY="22.0" prefHeight="25.0" prefWidth="82.0" text="Product ID:">
-                     <font>
-                        <Font name="Bookman Old Style Bold" size="12.0" />
-                     </font></Label>
-                          <Label layoutX="32.0" layoutY="59.0" prefHeight="25.0" prefWidth="99.0" text="Product Name:">
-                     <font>
-                        <Font name="Bookman Old Style Bold" size="12.0" />
-                     </font></Label>
-                          <Label layoutX="408.0" layoutY="18.0" prefHeight="25.0" prefWidth="62.0" text="Price:">
-                     <font>
-                        <Font name="Bookman Old Style Bold" size="12.0" />
-                     </font></Label>
-                          <ChoiceBox fx:id="categoryAdminInventory" layoutX="454.0" layoutY="60.0" prefWidth="150.0" style="-fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db); -fx-border-radius: 5;" />
-                          <Label layoutX="385.0" layoutY="58.0" prefHeight="25.0" prefWidth="62.0" text="Category:">
-                     <font>
-                        <Font name="Bookman Old Style Bold" size="12.0" />
-                     </font></Label>
-                          <Button layoutX="646.0" layoutY="15.0" mnemonicParsing="false" onAction="#onClickAdd" prefHeight="39.0" prefWidth="142.0" style="-fx-background-color: FF9F00; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db);" text="Add Product" AnchorPane.bottomAnchor="166.0" AnchorPane.leftAnchor="646.0">
-                     <font>
-                        <Font name="Bookman Old Style Bold" size="14.0" />
-                     </font>
-                  </Button>
-                          <Button layoutX="646.0" layoutY="66.0" mnemonicParsing="false" onAction="#onClickDelete" prefHeight="39.0" prefWidth="142.0" style="-fx-background-color: FF9F00; -fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db); -fx-border-radius: 5;" text="Delete" AnchorPane.bottomAnchor="115.0">
-                     <font>
-                        <Font name="Bookman Old Style Bold" size="14.0" />
-                     </font>
-                  </Button>
-                          <Label layoutX="14.0" layoutY="97.0" prefHeight="27.0" prefWidth="142.0" text="Product Image Name:">
-                     <font>
-                        <Font name="Bookman Old Style Bold" size="12.0" />
-                     </font></Label>
-                          <ChoiceBox fx:id="imageChoice" layoutX="156.0" layoutY="96.0" prefWidth="150.0" style="-fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db); -fx-border-radius: 5;" />
-                      </children>
-                  </AnchorPane>
-              </children>
-          </StackPane>
-      </children>
-  </AnchorPane>
+    <children>
+        <ListView fx:id="productListView" layoutX="11.2" prefHeight="418.0" prefWidth="882.0" style="-fx-background-radius: 5; -fx-border-color: FF9F00; -fx-border-radius: 5;" AnchorPane.bottomAnchor="233.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="10.0" />
+        <StackPane layoutX="8.0" layoutY="228.0" prefHeight="220.0" prefWidth="829.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
+            <children>
+                <AnchorPane prefHeight="369.0" prefWidth="801.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                    <children>
+                        <TextField fx:id="productIDAdminInventory" layoutX="128.0" layoutY="22.0" style="-fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db); -fx-border-radius: 5;" AnchorPane.leftAnchor="128.0" AnchorPane.topAnchor="22.0" />
+                        <TextField fx:id="productNameAdminInventory" layoutX="128.0" layoutY="58.0" prefHeight="25.0" prefWidth="207.0" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db);" AnchorPane.leftAnchor="128.0" />
+                        <TextField fx:id="priceAdminInventory" layoutX="453.0" layoutY="20.0" style="-fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db); -fx-border-radius: 5;" />
+                        <Label layoutX="50.0" layoutY="22.0" prefHeight="25.0" prefWidth="82.0" text="Product ID:">
+                            <font>
+                                <Font name="Bookman Old Style Bold" size="12.0" />
+                            </font></Label>
+                        <Label layoutX="32.0" layoutY="59.0" prefHeight="25.0" prefWidth="99.0" text="Product Name:">
+                            <font>
+                                <Font name="Bookman Old Style Bold" size="12.0" />
+                            </font></Label>
+                        <Label layoutX="408.0" layoutY="18.0" prefHeight="25.0" prefWidth="62.0" text="Price:">
+                            <font>
+                                <Font name="Bookman Old Style Bold" size="12.0" />
+                            </font></Label>
+                        <ChoiceBox fx:id="categoryAdminInventory" layoutX="454.0" layoutY="60.0" prefWidth="150.0" style="-fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db); -fx-border-radius: 5;" />
+                        <Label layoutX="385.0" layoutY="58.0" prefHeight="25.0" prefWidth="62.0" text="Category:">
+                            <font>
+                                <Font name="Bookman Old Style Bold" size="12.0" />
+                            </font></Label>
+                        <Button layoutX="646.0" layoutY="15.0" mnemonicParsing="false" onAction="#onClickAdd" prefHeight="39.0" prefWidth="142.0" style="-fx-background-color: FF9F00; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db);" text="Add Product" AnchorPane.bottomAnchor="166.0" AnchorPane.leftAnchor="646.0">
+                            <font>
+                                <Font name="Bookman Old Style Bold" size="14.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="646.0" layoutY="66.0" mnemonicParsing="false" onAction="#onClickDelete" prefHeight="39.0" prefWidth="142.0" style="-fx-background-color: FF9F00; -fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db); -fx-border-radius: 5;" text="Delete" AnchorPane.bottomAnchor="115.0">
+                            <font>
+                                <Font name="Bookman Old Style Bold" size="14.0" />
+                            </font>
+                        </Button>
+                        <Label layoutX="14.0" layoutY="97.0" prefHeight="27.0" prefWidth="142.0" text="Product Image Name:">
+                            <font>
+                                <Font name="Bookman Old Style Bold" size="12.0" />
+                            </font></Label>
+                        <ChoiceBox fx:id="imageChoice" layoutX="156.0" layoutY="96.0" prefWidth="150.0" style="-fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db); -fx-border-radius: 5;" />
+                  <Button layoutX="306.0" layoutY="97.0" mnemonicParsing="false" onAction="#onBrowseImage" text="Select Image" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </StackPane>
+    </children>
+</AnchorPane>

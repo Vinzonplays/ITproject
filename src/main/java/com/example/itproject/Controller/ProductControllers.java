@@ -9,6 +9,9 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.File;
+import java.io.InputStream;
+
 public class ProductControllers {
 
     @FXML private ImageView imageView;
@@ -16,19 +19,15 @@ public class ProductControllers {
     @FXML private Spinner<Integer> onSpinner;
     @FXML private Button onAdd;
     @FXML private Label amountAdd;
-    @FXML private Label priceLabel; // Optional, if used in FXML
 
     private ProductItem product;
 
-    // Initialize method is called after @FXML fields are injected
     @FXML
     public void initialize() {
-        // Set fixed size for imageView to ensure same size for all images
-        imageView.setFitWidth(200);  // width in pixels
-        imageView.setFitHeight(150); // height in pixels
-        imageView.setPreserveRatio(true); // keep aspect ratio without distortion
+        imageView.setFitWidth(200);
+        imageView.setFitHeight(150);
+        imageView.setPreserveRatio(true);
 
-        // Initialize spinner value factory here if desired
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 1);
         onSpinner.setValueFactory(valueFactory);
     }
@@ -36,22 +35,24 @@ public class ProductControllers {
     public void setData(ProductItem productItem) {
         this.product = productItem;
         nameAdd.setText(productItem.getName());
-        loadProductImage(productItem.getImagePath());
-
-        // Always show the original price only
         amountAdd.setText(String.format("₱%.2f", productItem.getPrice()));
-
-        // Spinner is already initialized in initialize() method
+        loadProductImage(productItem.getImagePath());
     }
 
     private void loadProductImage(String imagePath) {
-        var resource = getClass().getResourceAsStream("/com/example/itproject/images/" + imagePath);
+        // First try loading from resources
+        InputStream resource = getClass().getResourceAsStream("/com/example/itproject/images/" + imagePath);
         if (resource != null) {
-            // Load image with no extra resizing because imageView handles it
-            Image image = new Image(resource);
-            imageView.setImage(image);
+            imageView.setImage(new Image(resource));
         } else {
-            imageView.setImage(null);
+            // Try loading from file system (useful if image added via file chooser)
+            File file = new File("images/" + imagePath);
+            if (file.exists()) {
+                imageView.setImage(new Image(file.toURI().toString()));
+            } else {
+                imageView.setImage(null);
+                System.err.println("Image not found: " + imagePath);
+            }
         }
     }
 
@@ -68,7 +69,7 @@ public class ProductControllers {
         int quantity = getQuantity();
         double total = product.getPrice() * quantity;
         System.out.println("Adding to order: " + product.getName() + " x" + quantity + " = ₱" + total);
-        // Add to order logic here if needed
+        // Add to cart/order logic goes here
     }
 
     @FXML
