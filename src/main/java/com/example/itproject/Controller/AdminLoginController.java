@@ -34,7 +34,7 @@ public class AdminLoginController {
             Parent root = loader.load();
             Scene scene = new Scene(root, 1280, 720);  // Use 'root' instead of reloading
             Stage stage = (Stage) usernameField.getScene().getWindow();  // get current stage
-            stage.setMaximized(true);
+            stage.setMaximized(false);
             stage.setScene(scene);
             stage.setTitle("Order History - Admin Dashboard");
             stage.show();

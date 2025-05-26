@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="953.0" prefWidth="1600.0" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.HomeController">
     <children>
       <VBox alignment="CENTER" style="-fx-background-radius: 100; -fx-border-radius: 100;">
@@ -49,9 +48,9 @@
                   <Insets left="20.0" />
                </HBox.margin>
             </VBox>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane prefHeight="467.0" prefWidth="375.0">
                <children>
-                  <Button fx:id="si_OrderNow" layoutX="11.0" layoutY="145.0" mnemonicParsing="false" onAction="#onOderNow" prefHeight="72.0" prefWidth="178.0" style="-fx-background-color: FF9F00; -fx-border-radius: 5; -fx-background-radius: 5;" text="Order Now">
+                  <Button fx:id="si_OrderNow" layoutX="98.0" layoutY="14.0" mnemonicParsing="false" onAction="#onOderNow" prefHeight="72.0" prefWidth="178.0" style="-fx-background-color: FF9F00; -fx-border-radius: 5; -fx-background-radius: 5;" text="Order Now">
                      <font>
                         <Font name="Bell MT Bold" size="20.0" />
                      </font>

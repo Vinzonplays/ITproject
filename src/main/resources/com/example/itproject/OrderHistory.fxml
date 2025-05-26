@@ -41,9 +41,17 @@
                   <Insets left="20.0" top="10.0" />
                </HBox.margin>
                   </Label>
-            <Button fx:id="si_Inventory" mnemonicParsing="false" onAction="#onInventory" prefHeight="40.0" prefWidth="118.0" style="-fx-background-color: FF9F00; -fx-background-radius: 10;" text="Inventory" textFill="#fffcfc">
+            <Button fx:id="si_History" layoutX="1051.0" layoutY="20.0" mnemonicParsing="false" onAction="#onHistory" prefHeight="40.0" prefWidth="118.0" style="-fx-background-color: FF9F00; -fx-background-radius: 10;" text="History" textFill="#fffcfc">
+               <font>
+                  <Font name="Bookman Old Style Bold" size="18.0" />
+               </font>
                <HBox.margin>
-                  <Insets left="1000.0" top="10.0" />
+                  <Insets left="20.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="si_Inventory" mnemonicParsing="false" onAction="#onInventory" prefHeight="40.0" prefWidth="136.0" style="-fx-background-color: FF9F00; -fx-background-radius: 10;" text="Inventory" textFill="#fffcfc">
+               <HBox.margin>
+                  <Insets left="20.0" top="10.0" />
                </HBox.margin>
                <font>
                   <Font name="Bookman Old Style Bold" size="18.0" />
@@ -51,7 +59,7 @@
             </Button>
             <Button fx:id="si_Logout" mnemonicParsing="false" onAction="#OnLogout" prefHeight="40.0" prefWidth="118.0" style="-fx-background-color: FF9F00; -fx-background-radius: 10;" text="Logout" textFill="#fff9f9">
                <HBox.margin>
-                  <Insets left="30.0" top="10.0" />
+                  <Insets left="20.0" top="10.0" />
                </HBox.margin>
                <font>
                   <Font name="Bookman Old Style Bold" size="18.0" />

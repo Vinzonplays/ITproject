@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -103,6 +104,21 @@ public class OrderHistoryController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void onHistory() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/itproject/OrderHistory.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 1280, 720);
+            Stage stage = (Stage) paatPane.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @FXML
     private void OnLogout() {

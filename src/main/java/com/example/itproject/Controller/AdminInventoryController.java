@@ -110,7 +110,6 @@ public class AdminInventoryController {
                 productImageView.setImage(new Image(destFile.toURI().toString()));
             } catch (Exception e) {
                 e.printStackTrace();
-                showAlert("Failed to load image.");
             }
         }
     }

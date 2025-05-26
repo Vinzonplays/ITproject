@@ -51,7 +51,10 @@
                                 <Font name="Bookman Old Style Bold" size="12.0" />
                             </font></Label>
                         <ChoiceBox fx:id="imageChoice" layoutX="156.0" layoutY="96.0" prefWidth="150.0" style="-fx-background-radius: 5; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db); -fx-border-radius: 5;" />
-                  <Button layoutX="306.0" layoutY="97.0" mnemonicParsing="false" onAction="#onBrowseImage" text="Select Image" />
+                  <Button layoutX="313.0" layoutY="96.0" mnemonicParsing="false" onAction="#onBrowseImage" style="-fx-background-color: FF9F00; -fx-border-color: linear-gradient(to right, #2c3e50, #3498db); -fx-border-radius: 5;" text="Select Image">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="13.0" />
+                     </font></Button>
                     </children>
                 </AnchorPane>
             </children>

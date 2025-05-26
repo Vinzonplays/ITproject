@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="953.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.MenuController">
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="729.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.itproject.Controller.MenuController">
     <top>
         <HBox alignment="CENTER" prefHeight="75.0" prefWidth="1090.0" spacing="10" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);" BorderPane.alignment="TOP_CENTER">
             <children>
@@ -45,7 +45,7 @@
                 </TextField>
             </children>
             <BorderPane.margin>
-                <Insets />
+                <Insets top="5.0" />
             </BorderPane.margin>
         </HBox>
     </top>
@@ -93,11 +93,11 @@
         </VBox>
     </right>
     <center>
-        <ScrollPane hbarPolicy="NEVER" prefHeight="705.0" prefWidth="1053.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+        <ScrollPane hbarPolicy="NEVER" prefHeight="862.0" prefWidth="1170.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
             <content>
             <AnchorPane prefHeight="898.0" prefWidth="1162.0" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);">
                <children>
-                      <FlowPane fx:id="raatPane" layoutX="76.0" prefHeight="858.0" prefWidth="1046.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="15.0" />
+                      <FlowPane fx:id="raatPane" layoutX="82.4" prefHeight="852.0" prefWidth="1050.0" />
                </children>
             </AnchorPane>
             </content>
