@@ -18,7 +18,7 @@
             Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
             stage.setTitle("Hello!");
             stage.setScene(scene);
-            stage.setMaximized(true);
+
             stage.show();
         }
 
