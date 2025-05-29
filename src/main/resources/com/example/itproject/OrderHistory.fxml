@@ -18,7 +18,9 @@
                     <columns>
                         <TableColumn fx:id="adminProductId" prefWidth="125.66665136814117" text="Product ID" />
                         <TableColumn fx:id="adminProductName" prefWidth="125.66665136814117" text="Product Name" />
-                        <TableColumn fx:id="adminQuantity" prefWidth="125.66665136814117" text="Quantity" />
+                        <TableColumn fx:id="adminCashier" prefWidth="125.66665136814117" text="Cashier Name" />
+                  <TableColumn fx:id="adminQuantity" prefWidth="125.66665136814117" text="Quantity" />
+                  <TableColumn fx:id="adminDineINTakeOut" prefWidth="125.66665136814117" text="Dine In/Take OUt" />
                         <TableColumn fx:id="adminPrice" prefWidth="125.66665136814117" text="Price" />
                         <TableColumn fx:id="adminDateTime" prefWidth="125.66665136814117" text="Date &amp; Time" />
                         <TableColumn fx:id="adminRemove" prefWidth="125.66665136814117" text="Remove" />

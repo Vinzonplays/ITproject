@@ -121,8 +121,11 @@ public class PaymentController {
                     item.getProduct().getName(),
                     item.getQuantity(),
                     item.getProduct().getPrice(),
-                    orderDateTime
+                    orderDateTime,
+                    cashierName,
+                    orderType
             );
+
             orderHistoryDAO.insertHistoryRecord(record);
         }
 

@@ -1,0 +1,15 @@
+DROP DATABASE IF EXISTS order_history;
+CREATE DATABASE order_history;
+
+USE order_history;
+
+CREATE TABLE history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id VARCHAR(255),
+    product_name VARCHAR(255),
+    quantity INT,
+    price DOUBLE,
+    date_time DATETIME,
+    cashier_name VARCHAR(255),
+    order_type VARCHAR(255)
+);

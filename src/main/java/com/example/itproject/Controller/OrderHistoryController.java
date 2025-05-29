@@ -31,6 +31,8 @@ public class OrderHistoryController {
     @FXML private TableColumn<HistoryRecord, String> adminDateTime;
     @FXML private TableColumn<HistoryRecord, Void> adminRemove;
     @FXML private BorderPane paatPane;
+    @FXML private TableColumn<HistoryRecord, String> adminCashier;
+    @FXML private TableColumn<HistoryRecord, String> adminDineINTakeOut;
 
     private final ObservableList<HistoryRecord> historyData = FXCollections.observableArrayList();
     private final OrderHistoryDAO orderHistoryDAO = new OrderHistoryDAO();
@@ -52,6 +54,8 @@ public class OrderHistoryController {
         adminProductName.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProductName()));
         adminQuantity.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getQuantity()).asObject());
         adminPrice.setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getPrice()).asObject());
+        adminCashier.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCashierName()));
+        adminDineINTakeOut.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getOrderType()));
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         adminDateTime.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDateTime().format(formatter)));
@@ -104,6 +108,7 @@ public class OrderHistoryController {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void onHistory() {
         try {
@@ -117,8 +122,6 @@ public class OrderHistoryController {
             e.printStackTrace();
         }
     }
-
-
 
     @FXML
     private void OnLogout() {

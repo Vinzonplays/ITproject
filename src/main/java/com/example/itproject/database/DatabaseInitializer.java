@@ -17,7 +17,7 @@ public class DatabaseInitializer {
                     price REAL NOT NULL,
                     category TEXT NOT NULL,
                     imagePath TEXT
-                )
+                );
             """;
 
             String createOrderHistoryTable = """
@@ -27,8 +27,10 @@ public class DatabaseInitializer {
                     product_name TEXT NOT NULL,
                     quantity INTEGER NOT NULL,
                     price REAL NOT NULL,
-                    order_datetime TEXT NOT NULL
-                )
+                    date_time TEXT NOT NULL,
+                    cashier_name TEXT NOT NULL,
+                    order_type TEXT NOT NULL
+                );
             """;
 
             stmt.execute(createProductsTable);
