@@ -8,10 +8,14 @@ import com.example.itproject.HistoryRecord;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
@@ -21,16 +25,26 @@ import java.util.stream.Collectors;
 
 public class MenuController {
 
-    @FXML private FlowPane raatPane;
-    @FXML private TextField si_Search;
-    @FXML private Button si_Food, si_Drinks, si_Coffee, si_Snack, si_Dessert;  // fixed Dessert spelling
-    @FXML private Button si_Clear, si_Checkout;
-    @FXML private Label onTotal, orderStatusLabel;
-    @FXML private TableView<OrderItem> onTableview;
-    @FXML private TableColumn<OrderItem, String> foodItemColumn;
-    @FXML private TableColumn<OrderItem, Integer> foodQuantityColumn;
-    @FXML private TableColumn<OrderItem, Double> foodTotalColumn;
-    @FXML private TableColumn<OrderItem, Void> foodRemoveColumn;
+    @FXML
+    private FlowPane raatPane;
+    @FXML
+    private TextField si_Search;
+    @FXML
+    private Button si_Food, si_Drinks, si_Coffee, si_Snack, si_Dessert;  // fixed Dessert spelling
+    @FXML
+    private Button si_Clear, si_Checkout;
+    @FXML
+    private Label onTotal, orderStatusLabel;
+    @FXML
+    private TableView<OrderItem> onTableview;
+    @FXML
+    private TableColumn<OrderItem, String> foodItemColumn;
+    @FXML
+    private TableColumn<OrderItem, Integer> foodQuantityColumn;
+    @FXML
+    private TableColumn<OrderItem, Double> foodTotalColumn;
+    @FXML
+    private TableColumn<OrderItem, Void> foodRemoveColumn;
 
     private double totalAmount = 0.0;
     private final ProductRepository productRepository = new ProductRepository();
@@ -92,11 +106,35 @@ public class MenuController {
     }
 
     // === Navigation Handlers ===
-    @FXML private void onFood() { currentCategory = "Food"; displayProducts(currentCategory); }
-    @FXML private void onDrinks() { currentCategory = "Drinks"; displayProducts(currentCategory); }
-    @FXML private void onCoffee() { currentCategory = "Coffee"; displayProducts(currentCategory); }
-    @FXML private void onSnack() { currentCategory = "Snack"; displayProducts(currentCategory); }
-    @FXML private void onDessert() { currentCategory = "Dessert"; displayProducts(currentCategory); }
+    @FXML
+    private void onFood() {
+        currentCategory = "Food";
+        displayProducts(currentCategory);
+    }
+
+    @FXML
+    private void onDrinks() {
+        currentCategory = "Drinks";
+        displayProducts(currentCategory);
+    }
+
+    @FXML
+    private void onCoffee() {
+        currentCategory = "Coffee";
+        displayProducts(currentCategory);
+    }
+
+    @FXML
+    private void onSnack() {
+        currentCategory = "Snack";
+        displayProducts(currentCategory);
+    }
+
+    @FXML
+    private void onDessert() {
+        currentCategory = "Dessert";
+        displayProducts(currentCategory);
+    }
 
     private void displayProducts(String category) {
         List<ProductItem> products = productRepository.getAllProductsByCategory(category);
@@ -178,61 +216,32 @@ public class MenuController {
         orderStatusLabel.setText("Order cleared.");
     }
 
+    @FXML
     private void checkout() {
         if (onTableview.getItems().isEmpty()) {
             orderStatusLabel.setText("No items to checkout.");
             return;
         }
 
-        LocalDateTime now = LocalDateTime.now();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/itproject/Payment.fxml"));
+            Parent root = loader.load();
 
-        for (OrderItem item : onTableview.getItems()) {
-            HistoryRecord record = new HistoryRecord(
-                    item.getProduct().getId(),
-                    item.getProduct().getName(),
-                    item.getQuantity(),
-                    item.getProduct().getPrice(),
-                    now
-            );
-            orderHistoryDAO.insertHistoryRecord(record);
+            PaymentController paymentController = loader.getController();
+            paymentController.setOrderDetails(onTableview.getItems(), totalAmount);
+
+            Stage stage = new Stage();
+            stage.setTitle("Payment");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL); // Optional: block interaction with other windows
+            stage.showAndWait();
+
+
+            clearOrder();
+            orderStatusLabel.setText("Order placed successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        // Show receipt dialog
-        Alert receiptAlert = new Alert(Alert.AlertType.INFORMATION);
-        receiptAlert.setTitle("Order Receipt");
-        receiptAlert.setHeaderText("Your Order Receipt");
-        TextArea receiptTextArea = new TextArea(generateReceipt());
-        receiptTextArea.setEditable(false);
-        receiptTextArea.setWrapText(true);
-        receiptTextArea.setPrefWidth(400);
-        receiptTextArea.setPrefHeight(300);
-        receiptAlert.getDialogPane().setContent(receiptTextArea);
-        receiptAlert.showAndWait();
-
-        clearOrder();
-        orderStatusLabel.setText("Order placed successfully!");
     }
 
-    private String generateReceipt() {
-        StringBuilder receipt = new StringBuilder();
-        receipt.append("===== Receipt =====\n");
-        receipt.append("Date: ").append(LocalDateTime.now()).append("\n\n");
-
-        receipt.append(String.format("%-20s %5s %10s %10s\n", "Item", "Qty", "Price", "Total"));
-        receipt.append("--------------------------------------------------\n");
-
-        for (OrderItem item : onTableview.getItems()) {
-            String name = item.getProduct().getName();
-            int qty = item.getQuantity();
-            double price = item.getProduct().getPrice();
-            double total = price * qty;
-            receipt.append(String.format("%-20s %5d %10.2f %10.2f\n", name, qty, price, total));
-        }
-        receipt.append("--------------------------------------------------\n");
-        receipt.append(String.format("TOTAL: ₱%.2f\n", totalAmount));
-        receipt.append("===================\n");
-        receipt.append("Thank you for your order!");
-
-        return receipt.toString();
-    }
 }

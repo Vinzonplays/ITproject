@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.itproject.Controller.PaymentController"
+      spacing="15" alignment="TOP_LEFT">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Payment Details" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+    <!-- Cashier -->
+    <HBox spacing="10">
+        <Label text="Cashier:" style="-fx-font-weight: bold;" />
+        <ComboBox fx:id="cashierComboBox" prefWidth="180" />
+    </HBox>
+
+    <!-- Order Type -->
+    <HBox spacing="10">
+        <Label text="Order Type:" style="-fx-font-weight: bold;" />
+        <RadioButton fx:id="dineInRadio" text="Dine In" />
+        <RadioButton fx:id="takeOutRadio" text="Take Out" />
+    </HBox>
+
+    <Label text="Your Order:" style="-fx-font-weight: bold;" />
+    <ListView fx:id="orderListView" prefHeight="150" />
+
+    <!-- Payment Method -->
+    <Label text="Payment Method:" style="-fx-font-weight: bold;" />
+    <HBox spacing="10">
+        <RadioButton fx:id="cashRadio" text="Cash" />
+        <RadioButton fx:id="gcashRadio" text="Gcash" />
+    </HBox>
+
+    <Label text="Enter Cash Amount:" />
+    <TextField fx:id="cashAmountField" promptText="Enter cash amount" />
+
+    <!-- Total and Change -->
+    <HBox spacing="20">
+        <Label text="Total:" style="-fx-font-weight: bold;" />
+        <Label fx:id="totalLabel" text="₱0.00" />
+    </HBox>
+
+    <HBox spacing="20">
+        <Label text="Change:" style="-fx-font-weight: bold;" />
+        <Label fx:id="changeLabel" text="₱0.00" />
+    </HBox>
+
+    <!-- Buttons -->
+    <HBox spacing="15">
+        <Button text="Back" onAction="#handleBack" />
+        <Button fx:id="confirmButton" text="Checkout"
+                onAction="#handleConfirmPayment"
+                style="-fx-background-color: #28a745; -fx-text-fill: white;" />
+    </HBox>
+</VBox>
