@@ -10,16 +10,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.util.Callback;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderHistoryController {
 
@@ -29,10 +30,13 @@ public class OrderHistoryController {
     @FXML private TableColumn<HistoryRecord, Integer> adminQuantity;
     @FXML private TableColumn<HistoryRecord, Double> adminPrice;
     @FXML private TableColumn<HistoryRecord, String> adminDateTime;
-    @FXML private TableColumn<HistoryRecord, Void> adminRemove;
-    @FXML private BorderPane paatPane;
     @FXML private TableColumn<HistoryRecord, String> adminCashier;
     @FXML private TableColumn<HistoryRecord, String> adminDineINTakeOut;
+    @FXML private TableColumn<HistoryRecord, Double> adminTotal;
+    @FXML private ComboBox<String> filterComboBox;
+    @FXML private Label totalSalesLabel;
+    @FXML private BorderPane paatPane;
+    @FXML private DatePicker si_Datepicker; // ADD this
 
     private final ObservableList<HistoryRecord> historyData = FXCollections.observableArrayList();
     private final OrderHistoryDAO orderHistoryDAO = new OrderHistoryDAO();
@@ -40,13 +44,15 @@ public class OrderHistoryController {
     @FXML
     public void initialize() {
         configureColumns();
-        addRemoveButtonToTable();
         loadHistoryData();
-    }
 
-    private void loadHistoryData() {
-        historyData.setAll(orderHistoryDAO.getAllHistoryRecords());
-        adminTableview.setItems(historyData);
+        filterComboBox.getItems().addAll("Weekly", "Monthly", "Yearly");
+        filterComboBox.setValue("Weekly");
+        filterComboBox.setOnAction(e -> handleFilterSelection());
+
+        si_Datepicker.setOnAction(e -> onDatePicker()); // Set action for DatePicker
+
+        handleFilterSelection(); // Apply default filter
     }
 
     private void configureColumns() {
@@ -56,53 +62,65 @@ public class OrderHistoryController {
         adminPrice.setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getPrice()).asObject());
         adminCashier.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCashierName()));
         adminDineINTakeOut.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getOrderType()));
+        adminTotal.setCellValueFactory(data -> new SimpleDoubleProperty(data.getValue().getAdmintotal()).asObject());
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         adminDateTime.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDateTime().format(formatter)));
     }
 
-    private void addRemoveButtonToTable() {
-        adminRemove.setCellFactory(new Callback<>() {
-            @Override
-            public TableCell<HistoryRecord, Void> call(final TableColumn<HistoryRecord, Void> param) {
-                return new TableCell<>() {
-                    private final Button btn = new Button("Remove");
+    private void loadHistoryData() {
+        historyData.setAll(orderHistoryDAO.getAllHistoryRecords());
+        adminTableview.setItems(historyData);
+    }
 
-                    {
-                        btn.setStyle("-fx-background-color: red; -fx-text-fill: white;");
-                        btn.setOnAction(event -> {
-                            HistoryRecord record = getTableView().getItems().get(getIndex());
+    @FXML
+    private void handleFilterSelection() {
+        String selectedFilter = filterComboBox.getValue();
 
-                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                            alert.setTitle("Confirm Delete");
-                            alert.setHeaderText("Delete this record?");
-                            alert.setContentText("Are you sure you want to remove this history entry?");
+        if (selectedFilter != null) {
+            List<HistoryRecord> filtered = historyData.stream()
+                    .filter(record -> {
+                        LocalDateTime date = record.getDateTime();
+                        switch (selectedFilter) {
+                            case "Weekly":
+                                return date.isAfter(LocalDateTime.now().minusWeeks(1));
+                            case "Monthly":
+                                return date.isAfter(LocalDateTime.now().minusMonths(1));
+                            case "Yearly":
+                                return date.isAfter(LocalDateTime.now().minusYears(1));
+                            default:
+                                return true;
+                        }
+                    })
+                    .collect(Collectors.toList());
 
-                            alert.showAndWait().ifPresent(response -> {
-                                if (response == ButtonType.OK) {
-                                    historyData.remove(record);
-                                    orderHistoryDAO.deleteHistoryRecord(record);
-                                }
-                            });
-                        });
-                    }
+            adminTableview.setItems(FXCollections.observableArrayList(filtered));
 
-                    @Override
-                    protected void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        setGraphic(empty ? null : btn);
-                    }
-                };
-            }
-        });
+            double total = filtered.stream().mapToDouble(HistoryRecord::getAdmintotal).sum();
+            totalSalesLabel.setText("₱" + String.format("%.2f", total));
+        }
+    }
+
+    @FXML
+    private void onDatePicker() {
+        LocalDate selectedDate = si_Datepicker.getValue();
+        if (selectedDate != null) {
+            List<HistoryRecord> filteredByDate = historyData.stream()
+                    .filter(record -> record.getDateTime().toLocalDate().isEqual(selectedDate))
+                    .collect(Collectors.toList());
+
+            adminTableview.setItems(FXCollections.observableArrayList(filteredByDate));
+
+            double total = filteredByDate.stream().mapToDouble(HistoryRecord::getAdmintotal).sum();
+            totalSalesLabel.setText("₱" + String.format("%.2f", total));
+        }
     }
 
     @FXML
     private void onInventory() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/itproject/AdminInventory.fxml"));
-            Pane inventoryPane = loader.load();
-
+            Parent inventoryPane = loader.load();
             paatPane.setCenter(inventoryPane);
         } catch (IOException e) {
             e.printStackTrace();
@@ -114,10 +132,8 @@ public class OrderHistoryController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/itproject/OrderHistory.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root, 1280, 720);
             Stage stage = (Stage) paatPane.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+            stage.setScene(new Scene(root, 1280, 720));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,11 +143,9 @@ public class OrderHistoryController {
     private void OnLogout() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/itproject/Dashboard.fxml"));
-            Pane dashboardPane = loader.load();
-            Scene scene = new Scene(dashboardPane);
+            Parent dashboardPane = loader.load();
             Stage stage = (Stage) paatPane.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+            stage.setScene(new Scene(dashboardPane));
         } catch (IOException e) {
             e.printStackTrace();
         }

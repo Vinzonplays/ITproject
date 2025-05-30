@@ -29,7 +29,8 @@ public class DatabaseInitializer {
                     price REAL NOT NULL,
                     date_time TEXT NOT NULL,
                     cashier_name TEXT NOT NULL,
-                    order_type TEXT NOT NULL
+                    order_type TEXT NOT NULL,
+                    admintotal REAL
                 );
             """;
 

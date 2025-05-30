@@ -1,7 +1,6 @@
 package com.example.itproject.database;
 
 import com.example.itproject.ProductItem;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +42,7 @@ public class ProductDAO {
             stmt.setString(4, product.getCategory());
             stmt.setString(5, product.getImagePath());
 
-            int rowsInserted = stmt.executeUpdate();
-            return rowsInserted > 0;
+            return stmt.executeUpdate() > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,9 +54,10 @@ public class ProductDAO {
         String sql = "DELETE FROM products WHERE id = ?";
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setString(1, id);
-            int rowsDeleted = stmt.executeUpdate();
-            return rowsDeleted > 0;
+            return stmt.executeUpdate() > 0;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

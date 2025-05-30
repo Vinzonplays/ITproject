@@ -116,6 +116,7 @@ public class PaymentController {
         // ✅ Save each order item into the database
         LocalDateTime orderDateTime = LocalDateTime.parse(dateTime);
         for (OrderItem item : orderItems) {
+            double admintotal = item.getQuantity() * item.getProduct().getPrice();
             HistoryRecord record = new HistoryRecord(
                     item.getProduct().getId(),
                     item.getProduct().getName(),
@@ -123,8 +124,9 @@ public class PaymentController {
                     item.getProduct().getPrice(),
                     orderDateTime,
                     cashierName,
-                    orderType
-            );
+                    orderType,
+                    admintotal);
+
 
             orderHistoryDAO.insertHistoryRecord(record);
         }
